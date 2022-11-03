@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTimeout;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -83,19 +85,40 @@ public class OpenwebinarsTests {
 	void pruebaTimeout() {
 
 		assertTimeout(Duration.ofSeconds(3), () -> {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		});
 	}
 
 	@Test
-	@DisplayName("Aserción Assert all")
+	@DisplayName("Aserción Assert all, agrupando aserciones")
 	void pruebaAall() {
 		assertAll(
 				() -> {assertTrue(true);},
-				() -> {assertFalse(true);},
+				() -> {assertFalse(false);},
 				() -> {assertEquals("cadena1", "cadena1");},
-				() -> {assertEquals(1, 2);}
+				() -> {assertEquals(2, 2);}
 				);
 	
+	}
+	
+	@Test
+	@DisplayName("Asunciones")
+	void pruebaAsuncion() {
+		boolean verdadero = true;
+		assumeTrue(!verdadero);
+		System.out.println("Esta linea solo se mostrará si la asunción se cumple.");
+	}
+	
+	@Test
+	@DisplayName("Asunciones THAT")
+	void pruebaAsuncionThat() {
+		boolean verdadero = true;
+
+		assumingThat(!verdadero, ()->{			
+			System.out.println("Esta linea solo se mostrará si la asunción se cumple.");
+		});
+		
+		System.out.println("Esta linea SIEMPRE");
+
 	}
 }
