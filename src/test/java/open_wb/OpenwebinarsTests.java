@@ -135,8 +135,8 @@ public class OpenwebinarsTests {
 	}
 	
 	@ParameterizedTest
-	@ValueSource(strings = "cadena")
-	void pruebaParametrizada(String input) {
+	@ValueSource(ints =  {1, 2, 3, 4, 5})
+	void pruebaParametrizada(int input) {
 		System.out.println(input);
 	}
 	
