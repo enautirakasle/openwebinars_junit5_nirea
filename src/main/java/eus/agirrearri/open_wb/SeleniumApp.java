@@ -19,12 +19,14 @@ public class SeleniumApp {
 		
 		driver.get("http://www.saucedemo.com");
 				
-		driver.findElement(By.id("user-name")).sendKeys("standard_user");
+		driver.findElement(By.id("user-name")).sendKeys("locked_out_user");
 		driver.findElement(By.id("password")).sendKeys("secret_sauce");
 		driver.findElement(By.id("login-button")).click();
+				
+//		String texto = driver.findElement(By.className("title")).getText();
+//		System.out.println(texto);
 		
-		String texto = driver.findElement(By.className("title")).getText();
-		
+		String texto = driver.findElement(By.className("error-message-container")).getText();
 		System.out.println(texto);
 		
 		try {
