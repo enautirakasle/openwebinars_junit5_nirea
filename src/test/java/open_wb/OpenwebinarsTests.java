@@ -15,6 +15,8 @@ import java.time.Duration;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.api.Test;
 
 public class OpenwebinarsTests {
@@ -120,5 +122,12 @@ public class OpenwebinarsTests {
 		
 		System.out.println("Esta linea SIEMPRE");
 
+	}
+	
+	@DisplayName("Test de Repeticion")
+	@RepeatedTest(value=3, name=" TEST: [{displayName}] -> {currentRepetition} de {totalRepetitions}")
+	void pruebaRepeated(RepetitionInfo repetitionInfo) {
+		System.out.println("Pertenece al repedated test");
+		
 	}
 }
