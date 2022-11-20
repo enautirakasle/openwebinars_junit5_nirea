@@ -18,6 +18,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class OpenwebinarsTests {
 
@@ -130,7 +132,12 @@ public class OpenwebinarsTests {
 		System.out.println("Estoy en la iteracion: " + repetitionInfo.getCurrentRepetition());
 		System.out.println("De un total de: " + repetitionInfo.getTotalRepetitions());
 		System.out.println("-----------");
-		
-		
 	}
+	
+	@ParameterizedTest
+	@ValueSource(strings = "cadena")
+	void pruebaParametrizada(String input) {
+		System.out.println(input);
+	}
+	
 }
