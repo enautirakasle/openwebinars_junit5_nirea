@@ -127,7 +127,10 @@ public class OpenwebinarsTests {
 	@DisplayName("Test de Repeticion")
 	@RepeatedTest(value=3, name=" TEST: [{displayName}] -> {currentRepetition} de {totalRepetitions}")
 	void pruebaRepeated(RepetitionInfo repetitionInfo) {
-		System.out.println("Pertenece al repedated test");
+		System.out.println("Estoy en la iteracion: " + repetitionInfo.getCurrentRepetition());
+		System.out.println("De un total de: " + repetitionInfo.getTotalRepetitions());
+		System.out.println("-----------");
+		
 		
 	}
 }
