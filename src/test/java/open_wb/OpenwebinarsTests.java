@@ -19,7 +19,7 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class OpenwebinarsTests {
 
@@ -135,9 +135,13 @@ public class OpenwebinarsTests {
 	}
 	
 	@ParameterizedTest
-	@ValueSource(ints =  {1, 2, 3, 4, 5})
-	void pruebaParametrizada(int input) {
-		System.out.println(input);
+	@CsvSource({
+		"esperdo,actual", 
+		"valor1,valor2",
+		"igual,igual"
+	})
+	void pruebaParametrizada(String esperado, String actual) {
+		assertEquals(esperado, actual);
 	}
 	
 }
