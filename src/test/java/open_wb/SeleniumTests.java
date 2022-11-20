@@ -1,11 +1,17 @@
 package open_wb;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.time.Duration;
 
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -22,28 +28,43 @@ public class SeleniumTests {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 	}
 
-	@Test
-	@DisplayName("Soy el test 1")
-	void test1() {
+	@BeforeEach
+	void  before_each() {
 		driver.get("http://www.saucedemo.com");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+	}
+	
+	@Test
+	@DisplayName("Login con usuario correcto")
+	void test1() {
+		driver.findElement(By.id("user-name")).sendKeys("standard_user");
+		driver.findElement(By.id("password")).sendKeys("secret_sauce");
+		driver.findElement(By.id("login-button")).click();
+		
+		String products = "";
+		products = driver.findElement(By.className("title")).getText();
+		
+		assertEquals("PRODUCTS", products);
 	}
 
 	@Test
-	@DisplayName("Soy el test 2")
+	@DisplayName("Login con usuairo incorrecto")
 	void test2() {
-		driver.get("http://www.wikipedia.com");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		driver.findElement(By.id("user-name")).sendKeys("locked_out_user");
+		driver.findElement(By.id("password")).sendKeys("secret_sauce");
+		driver.findElement(By.id("login-button")).click();
+		
+		String mensajeError = "";
+		mensajeError = driver.findElement(By.className("error-message-container")).getText();
+		
+		assertTrue(mensajeError.contains("locked out"));
 	}
 
+	@AfterEach
+	void after_each() {
+		driver.manage().deleteAllCookies();
+		
+	}
+	
 	@AfterAll
 	static void after_all() {
 		if(driver != null) {
