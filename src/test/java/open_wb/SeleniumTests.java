@@ -43,7 +43,7 @@ public class SeleniumTests {
 		String products = "";
 		products = driver.findElement(By.className("title")).getText();
 		
-		assertEquals("PRODUCTS", products);
+		assertEquals("Products", products);
 	}
 
 	@Test
@@ -58,6 +58,7 @@ public class SeleniumTests {
 		
 		assertTrue(mensajeError.contains("locked out"));
 	}
+	
 
 	@AfterEach
 	void after_each() {
